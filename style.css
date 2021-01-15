@@ -8,6 +8,15 @@ body {
 	margin: 0;
 }
 
+.welcome {
+	outline: black solid 1px;
+	padding: 0.2rem;
+	margin: 1rem;
+	max-width: 100vw;
+	overflow: hidden;
+	text-align: center;
+}
+
 .book-select {
 	outline: black solid 1px;
 	padding: 0.2rem;
