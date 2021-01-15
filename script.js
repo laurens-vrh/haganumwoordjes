@@ -80,14 +80,14 @@ async function renderResults(results) {
 
 		var translationText = document.createElement("span");
 		translationText.classList.add("translation");
-		if (!result.lesson[0].includes(".")) {
+		if (results.lesson && !result.lesson[0].includes(".")) {
 			translationText.innerText = result.translation.join(" / ");
 			translationText.innerText += ` ${result.lesson}`;
 		} else {
 			counter = 0;
 			result.translation.forEach((translation) => {
 				translationText.innerText += `${translation}`;
-				translationText.innerText += ` ${result.lesson[counter]}`;
+				translationText.innerText += ` ${result.lesson ? result.lesson[counter] : ""}`;
 				if (counter < result.translation.length - 1) translationText.innerText += ` / `;
 				counter++;
 			});
