@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+	font-family: "Roboto", sans-serif;
+}
+
+body {
+	margin: 0;
+}
+
+.book-select {
+	outline: black solid 1px;
+	padding: 0.2rem;
+	margin: 1rem;
+	max-width: 100vw;
+	overflow: hidden;
+}
+
+.book-select select {
+	font-size: 1rem;
+	width: 100%;
+}
+
+.container {
+	outline: black solid 1px;
+	padding: 0.2rem;
+	margin: 1rem;
+	max-width: 100vw;
+	overflow: hidden;
+}
+
+.container input {
+	width: 99%;
+	font-size: 1rem;
+}
+
+.results-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 0.5rem;
+	padding: 0.5rem;
+}
+
+.word-box {
+	width: 43%;
+	outline: black solid 0.5px;
+	padding: 0.5rem;
+	margin: 10px;
+}
+
+.word-box span {
+	margin: 0;
+	grid-column-start: 1;
+}
+
+.word-box .time {
+	font-style: italic;
+}
+
+.word-box .goeswith {
+	font-style: italic;
+}
+
+.word-box .translation-div {
+	text-align: right;
+	width: fit-content;
+}
+
+.word-box .translation {
+	color: rgb(118, 118, 118);
+}
+
+.word-box .word {
+	font-weight: 500;
+	width: fit-content;
+	margin-right: 5px;
+}
+
+.word-box .lesson {
+	margin: 5px;
+}
+
+.word-box .sex {
+	font-style: italic;
+}
