@@ -33,7 +33,7 @@ async function searchCheck() {
 async function search(term) {
 	results_container.innerHTML = "";
 	const book = db[book_select.value];
-	var results = book.filter((w) => w.word.includes(term.toLowerCase()) || w.translation.join("\n").includes(term.toLowerCase()));
+	var results = book.filter((w) => w.word.replace("ē", "e").includes(term.toLowerCase()) || w.translation.join("\n").includes(term.toLowerCase()));
 	renderResults(results);
 }
 
@@ -70,8 +70,7 @@ async function renderResults(results) {
 		if (result.goesWith) {
 			var goesWithText = document.createElement("span");
 			goesWithText.classList.add("goeswith");
-			cases = ["nom", "gen", "dat", "acc", "abl", "voc"];
-			goesWithText.innerText = `+ ${cases[result.goesWith]}.`;
+			goesWithText.innerText = ` ${result.goesWith}`;
 			div.appendChild(goesWithText);
 		}
 
@@ -92,7 +91,7 @@ async function renderResults(results) {
 				counter++;
 			});
 		}
-		if (result.time == "pf") translationText.innerText = `←  ${result.translation}`;
+		if (result.time == "pf" || result.time == "ppp" || result.time == "ppa") translationText.innerText = `←  ${result.translation}`;
 
 		div2.appendChild(translationText);
 		div.appendChild(div2);
