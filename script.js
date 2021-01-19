@@ -33,11 +33,7 @@ async function searchCheck() {
 async function search(term) {
 	results_container.innerHTML = "";
 	const book = db[book_select.value];
-	var results = book.filter(
-		(w) =>
-			w.word.replace("ē", "e").replace("(", "").replace(")", "").includes(term.toLowerCase()) ||
-			w.translation.join("\n").includes(term.toLowerCase())
-	);
+	var results = book.filter((w) => w.word.replace("ē", "e").includes(term.toLowerCase()) || w.translation.join("\n").includes(term.toLowerCase()));
 	renderResults(results);
 }
 
