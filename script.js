@@ -33,13 +33,13 @@ async function searchCheck() {
 async function search(term) {
 	results_container.innerHTML = "";
 	const book = db[book_select.value];
-	var edited = searchEdit(w.word);
-	var results = book.filter((w) => edited.includes(term.toLowerCase()) || w.translation.join("\n").includes(term.toLowerCase()));
-	renderResults(results);
-}
 
-async function searchEdit(word) {
-	return word.replace("ē", "e").replace("(", "").replace(")", "");
+	var results = book.filter(
+		(w) =>
+			w.word.replace("ē", "e").replace("(", "").replace(")", "").includes(term.toLowerCase()) ||
+			w.translation.join("\n").includes(term.toLowerCase())
+	);
+	renderResults(results);
 }
 
 async function renderResults(results) {
