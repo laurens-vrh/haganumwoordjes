@@ -33,7 +33,8 @@ async function searchCheck() {
 async function search(term) {
 	results_container.innerHTML = "";
 	const book = db[book_select.value];
-	var results = book.filter((w) => searchEdit(w.word).includes(term.toLowerCase()) || w.translation.join("\n").includes(term.toLowerCase()));
+	var edited = searchEdit(w.word);
+	var results = book.filter((w) => edited.includes(term.toLowerCase()) || w.translation.join("\n").includes(term.toLowerCase()));
 	renderResults(results);
 }
 
