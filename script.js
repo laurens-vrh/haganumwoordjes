@@ -2,10 +2,25 @@ const book_select = document.getElementById("book-select");
 const search_box = document.getElementById("search-box");
 const results_container = document.getElementById("results-container");
 const updates = document.getElementById("updates");
+const hide_show = document.getElementById("hide-show");
+const favicon = document.getElementById("favicon");
 
 db = undefined;
 loadDB();
 updateUpdates();
+
+hide_show.addEventListener("click", (e) => {
+	e.preventDefault();
+	if (hide_show.innerText == "Hide") {
+		document.title = "Gymnasium Haganum - Agenda";
+		favicon.href = `https://calendar.google.com/googlecalendar/images/favicons_2020q4/calendar_${new Date().getDate()}.ico`;
+		hide_show.innerText = "Show";
+	} else {
+		document.title = "Haganum Woordjes";
+		favicon.href = "logo_icon_dinges.png";
+		hide_show.innerText = "Hide";
+	}
+});
 
 search_box_value_old = search_box.value;
 ["propertychange", "change", "click", "keyup", "input", "paste"].forEach((event) => {
