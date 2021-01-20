@@ -1,9 +1,11 @@
 const book_select = document.getElementById("book-select");
 const search_box = document.getElementById("search-box");
 const results_container = document.getElementById("results-container");
+const updates = document.getElementById("updates");
 
 db = undefined;
 loadDB();
+updateUpdates();
 
 search_box_value_old = search_box.value;
 ["propertychange", "change", "click", "keyup", "input", "paste"].forEach((event) => {
@@ -28,6 +30,11 @@ async function searchCheck() {
 	if (search_box.value == "") return (results_container.innerHTML = "");
 	search_box_value_old = search_box.value;
 	search(search_box.value);
+}
+
+async function updateUpdates() {
+	var res = await fetch("https://jsonblob.com/api/jsonBlob/465afa85-5b0a-11eb-b5da-bd88ca7c34a0");
+	updates.innerText = await res.json();
 }
 
 async function search(term) {
