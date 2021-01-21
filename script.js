@@ -17,7 +17,7 @@ hide_show.addEventListener("click", (e) => {
 		hide_show.innerText = "Show";
 	} else {
 		document.title = "Haganum Woordjes";
-		favicon.href = "logo_icon_dinges.png";
+		favicon.href = "favicon.png";
 		hide_show.innerText = "Hide";
 	}
 });
