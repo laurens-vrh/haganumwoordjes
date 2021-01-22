@@ -7,6 +7,8 @@
 body {
 	margin: 0;
 	background: linear-gradient(to right top, #65dfc9, #46d0e6);
+	width: 98vw;
+	height: 97vh;
 }
 
 .welcome {
@@ -132,4 +134,18 @@ body {
 
 .word-box .sex {
 	font-style: italic;
+}
+
+#copy-hold {
+	opacity: 0;
+	cursor: default;
+}
+
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }

@@ -77,12 +77,32 @@ async function renderResults(results) {
 
 		var wordText = document.createElement("span");
 		wordText.classList.add("word");
+		wordText.classList.add("noselect");
 		wordText.innerText = result.word;
+
+		wordText.addEventListener("mouseenter", (e) => {
+			wordText.innerHTML += ` <i class="far fa-copy" style="color: rgb(118, 118, 118);"></i>`;
+		});
+		wordText.addEventListener("mouseleave", (e) => {
+			wordText.innerHTML = wordText.innerHTML.substring(0, wordText.innerHTML.length - 82);
+		});
+		wordText.addEventListener("click", (e) => {
+			const copy_hold = document.getElementById("copy-hold");
+			copy_hold.value = wordText.innerText.substring(0, wordText.innerText.length - 1);
+
+			copy_hold.select();
+			copy_hold.setSelectionRange(0, 99999);
+
+			document.execCommand("copy");
+			// wordText.innerHTML += ` <i class="fas fa-link" style="color: rgb(118, 118, 118);"></i>`;
+		});
+
 		div.appendChild(wordText);
 
 		if (result.time) {
 			var timeText = document.createElement("span");
 			timeText.classList.add("time");
+			timeText.classList.add("noselect");
 			timeText.innerText = result.time;
 			div.appendChild(timeText);
 		}
@@ -90,6 +110,7 @@ async function renderResults(results) {
 		if (result.sex) {
 			var sexText = document.createElement("span");
 			sexText.classList.add("sex");
+			sexText.classList.add("noselect");
 			sexText.innerText = result.sex;
 			div.appendChild(sexText);
 		}
@@ -97,6 +118,7 @@ async function renderResults(results) {
 		if (result.goesWith) {
 			var goesWithText = document.createElement("span");
 			goesWithText.classList.add("goeswith");
+			goesWithText.classList.add("noselect");
 			goesWithText.innerText = ` ${result.goesWith}`;
 			div.appendChild(goesWithText);
 		}
