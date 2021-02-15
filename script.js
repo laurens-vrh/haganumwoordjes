@@ -94,7 +94,6 @@ async function renderResults(results) {
 			copy_hold.setSelectionRange(0, 99999);
 
 			document.execCommand("copy");
-			// wordText.innerHTML += ` <i class="fas fa-link" style="color: rgb(118, 118, 118);"></i>`;
 		});
 
 		div.appendChild(wordText);
@@ -135,7 +134,6 @@ async function renderResults(results) {
 			counter = 0;
 			result.translation.forEach((translation) => {
 				translationText.innerText += `${translation}`;
-				translationText.innerText += ` ${result.lesson ? result.lesson[counter] : ""}`;
 				if (counter < result.translation.length - 1) translationText.innerText += ` / `;
 				counter++;
 			});
