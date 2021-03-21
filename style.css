@@ -136,11 +136,6 @@ body {
 	font-style: italic;
 }
 
-#copy-hold {
-	opacity: 0;
-	cursor: default;
-}
-
 .noselect {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
