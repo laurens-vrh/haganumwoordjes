@@ -94,7 +94,7 @@ async function renderResults(results) {
 		wordText.innerText = result.word;
 
 		wordText.addEventListener("mouseenter", (e) => {
-			wordText.innerHTML += ` <i class="far fa-copy" style="color: rgb(118, 118, 118);"></i>`;
+			wordText.innerHTML += ` <img src="https://fonts.gstatic.com/s/i/materialicons/content_copy/v15/24px.svg" style="width: 15px;" />`;
 		});
 		wordText.addEventListener("mouseleave", (e) => {
 			wordText.innerHTML = wordText.innerHTML.substring(0, wordText.innerHTML.length - 82);
