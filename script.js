@@ -5,6 +5,12 @@ const updates = document.getElementById("updates");
 const hide_show = document.getElementById("hide-show");
 const favicon = document.getElementById("favicon");
 
+const replaceChars = {
+	ē: `e`,
+	"(": ``,
+	")": ``,
+};
+
 db = undefined;
 loadDB();
 updateUpdates();
@@ -43,6 +49,7 @@ async function loadDB() {
 async function searchCheck() {
 	if (search_box.value == search_box_value_old) return;
 	if (search_box.value == "") return (results_container.innerHTML = "");
+	if (search_box.value.length < 2) return (results_container.innerHTML = "Enter 2 or more characters.");
 	search_box_value_old = search_box.value;
 	search(search_box.value);
 }
@@ -56,11 +63,17 @@ async function search(term) {
 	results_container.innerHTML = "";
 	const book = db[book_select.value];
 
-	var results = book.filter(
-		(w) =>
-			w.word.replace("ē", "e").replace("(", "").replace(")", "").includes(term.toLowerCase()) ||
-			w.translation.join("\n").includes(term.toLowerCase())
-	);
+	term = term.toLowerCase();
+
+	var results = book.filter((w) => {
+		w.translation = w.translation.join("\n");
+		Object.entries(replaceChars).forEach(([key, value]) => {
+			w.word.replace(key, value);
+			w.translation.replace(key, value);
+		});
+		w.translation = w.translation.split(`\n`);
+		return w.word.includes(term) || w.translation.join(`\n`).includes(term);
+	});
 	renderResults(results);
 }
 
