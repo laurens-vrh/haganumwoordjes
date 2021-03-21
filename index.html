@@ -5,7 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Haganum Woordjes</title>
 		<script src="script.js" defer></script>
-		<script src="https://kit.fontawesome.com/705944ce59.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="style.css" />
 
 		<link id="favicon"
@@ -19,6 +18,7 @@
 		<meta property="og:description" content="Alle woordjes die je moet leren, op één plek."/>
 		<meta name="theme-color" content="#46d0e6"> 
 		<meta property="og:image" content="https://haganumwoordjes.ga/logo_icon_dinges.png" />
+		<meta name="description" content="Alle woordjes die je moet leren, op één plek.">
 		 
 
 		<div class="welcome">
@@ -36,6 +36,7 @@
 		</div>
 
 		<div class="book-select">
+			<label for="book-select" style="font-size: 1px;color: #00000000;position: absolute;">.</label>
 			<select id="book-select">
 				<option value="vivatroma">Vivat Roma</option>
 				<option value="libreservicejuniorvwo">Libre Service Junior VWO</option>
@@ -45,10 +46,12 @@
 		</div>
 
 		<div class="container">
+			<label for="search-box" style="font-size: 1px;color: #00000000;position: absolute;">.</label>
 			<input id="search-box" placeholder="Zoeken..." autocomplete="off" />
 			<div class="results-container" id="results-container"></div>
 		</div>
 
+		<label for="copy-hold" style="font-size: 1px;color: #00000000;position: absolute;">.</label>
 		<input id="copy-hold"></input>
 	</body>
 </html>

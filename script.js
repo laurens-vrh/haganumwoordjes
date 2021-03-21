@@ -94,10 +94,10 @@ async function renderResults(results) {
 		wordText.innerText = result.word;
 
 		wordText.addEventListener("mouseenter", (e) => {
-			wordText.innerHTML += ` <img src="https://fonts.gstatic.com/s/i/materialicons/content_copy/v15/24px.svg" style="width: 15px;" />`;
+			wordText.innerHTML += ` <img src="https://fonts.gstatic.com/s/i/materialicons/content_copy/v15/24px.svg" style="width: 15px;" alt="" />`;
 		});
 		wordText.addEventListener("mouseleave", (e) => {
-			wordText.innerHTML = wordText.innerHTML.substring(0, wordText.innerHTML.length - 82);
+			wordText.innerHTML = wordText.innerHTML.substring(0, wordText.innerHTML.length - 88);
 		});
 		wordText.addEventListener("click", (e) => {
 			const copy_hold = document.getElementById("copy-hold");
