@@ -49,7 +49,7 @@ async function loadDB() {
 async function searchCheck() {
 	if (search_box.value == search_box_value_old) return;
 	if (search_box.value == "") return (results_container.innerHTML = "");
-	if (search_box.value.length < 2) return (results_container.innerHTML = "Enter 2 or more characters.");
+	if (search_box.value.length < 2 && search_boc.value != `*`) return (results_container.innerHTML = "Enter 2 or more characters.");
 	search_box_value_old = search_box.value;
 	search(search_box.value);
 }
@@ -74,6 +74,7 @@ async function search(term) {
 		w.translation = w.translation.split(`\n`);
 		return w.word.includes(term) || w.translation.join(`\n`).includes(term);
 	});
+	if (term == `*`) results = book;
 	renderResults(results);
 }
 
