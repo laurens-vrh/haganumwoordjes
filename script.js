@@ -41,15 +41,14 @@ book_select.addEventListener("change", (e) => {
 });
 
 async function loadDB() {
-	readTextFile("./database.json", function (text) {
-		db = JSON.parse(text);
-	});
+	const data = await fetch(`database.json`);
+	db = await data.json();
 }
 
 async function searchCheck() {
 	if (search_box.value == search_box_value_old) return;
 	if (search_box.value == "") return (results_container.innerHTML = "");
-	if (search_box.value.length < 2 && search_boc.value != `*`) return (results_container.innerHTML = "Enter 2 or more characters.");
+	if (search_box.value.length < 2 && search_box.value != `*`) return (results_container.innerHTML = "Enter 2 or more characters.");
 	search_box_value_old = search_box.value;
 	search(search_box.value);
 }
@@ -61,21 +60,80 @@ async function updateUpdates() {
 
 async function search(term) {
 	results_container.innerHTML = "";
-	const book = db[book_select.value];
+	var book = db[book_select.value];
 
 	term = term.toLowerCase();
 
-	var results = book.filter((w) => {
-		w.translation = w.translation.join("\n");
-		Object.entries(replaceChars).forEach(([key, value]) => {
-			w.word.replace(key, value);
-			w.translation.replace(key, value);
-		});
-		w.translation = w.translation.split(`\n`);
-		return w.word.includes(term) || w.translation.join(`\n`).includes(term);
+	// var results = book.filter((w) => {
+	// 	w.translation = w.translation.join("\n");
+	// 	Object.entries(replaceChars).forEach(([key, value]) => {
+	// 		w.word = w.word.replace(key, value);
+	// 		w.translation = w.translation.replace(key, value);
+	// 	});
+	// 	w.translation = w.translation.split(`\n`);
+	// 	return w.word.includes(term) || w.translation.join(`\n`).includes(term);
+	// });
+
+	// book = [book[0], book[1], book[2], book[3], book[4], book[5], book[6], book[7], book[8]];
+
+	book = book.map((w) => {
+		w.relevance = calculateRelevance(w, term);
+		w.lengthrelevance = calculateLengthRelevance(w, term);
+		return w;
 	});
+	book = book.filter((w) => w.relevance > 0.5 && w.lengthrelevance > 0.2);
+
+	var results = book
+		.sort((a, b) => {
+			return a.relevance - b.relevance;
+		})
+		.sort((a, b) => {
+			return a.relevance == b.relevance ? a.lengthrelevance - b.lengthrelevance : 0;
+		})
+		.reverse();
+
 	if (term == `*`) results = book;
 	renderResults(results);
+	// console.log(results[0], results[1], results[2], results[3], results[4], results[5], results[6]);
+	console.log(results);
+}
+
+function calculateRelevance(w, term) {
+	var word = w.word;
+	Object.entries(replaceChars).forEach(([key, value]) => {
+		word = word.replaceAll(key, value);
+	});
+
+	const wLength = word.length;
+	const termLength = term.length;
+
+	var termLetter = 0;
+	var wLetter = 0;
+	var matchingLetters = 0;
+
+	while (wLetter < wLength && termLetter < termLength) {
+		if (term[termLetter] == word[wLetter]) {
+			termLetter++;
+			wLetter++;
+			matchingLetters++;
+			continue;
+		}
+		wLetter++;
+	}
+
+	return matchingLetters / termLength;
+}
+
+function calculateLengthRelevance(w, term) {
+	var word = w.word;
+	Object.entries(replaceChars).forEach(([key, value]) => {
+		word = word.replaceAll(key, value);
+	});
+
+	const wLength = word.length;
+	const termLength = term.length;
+
+	return termLength / wLength;
 }
 
 async function renderResults(results) {
@@ -158,16 +216,4 @@ async function renderResults(results) {
 		div.appendChild(div2);
 		results_container.appendChild(div);
 	});
-}
-
-function readTextFile(file, callback) {
-	var rawFile = new XMLHttpRequest();
-	rawFile.overrideMimeType("application/json");
-	rawFile.open("GET", file, true);
-	rawFile.onreadystatechange = function () {
-		if (rawFile.readyState === 4 && rawFile.status == "200") {
-			callback(rawFile.responseText);
-		}
-	};
-	rawFile.send(null);
 }
