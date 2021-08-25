@@ -54,7 +54,7 @@ async function searchCheck() {
 }
 
 async function updateUpdates() {
-	var res = await fetch("https://jsonblob.com/api/jsonBlob/465afa85-5b0a-11eb-b5da-bd88ca7c34a0");
+	var res = await fetch("https://jsonblob.com/api/jsonBlob/e6c79a7a-05ab-11ec-aaee-9dc878e33fd5");
 	updates.innerText = await res.json();
 }
 
