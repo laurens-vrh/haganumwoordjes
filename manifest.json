@@ -1,0 +1,26 @@
+{
+	"short_name": "Haganumwoordjes",
+	"name": "Haganumwoordjes | haganum.net",
+	"icons": [
+		{
+			"src": "/img/favicon_192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "/img/icon_512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"id": "/",
+	"start_url": "/",
+	"background_color": "#1a1a1a",
+	"display": "standalone",
+	"scope": "/",
+	"theme_color": "#1a1a1a",
+	"shortcuts": [],
+	"description": "Alle woordjes die je moet leren, op één plek.",
+	"screenshots": [],
+	"prefer_related_applications": true
+}

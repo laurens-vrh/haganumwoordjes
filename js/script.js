@@ -11,9 +11,13 @@ const elements = {
 
 
 const replaceChars = {
-    ē: 'e',
-    "(": '',
-    ")": '',
+    ē: "e",
+    "(": "",
+    ")": "",
+    ü: "u",
+    ö: "o",
+    ä: "a",
+    ï: "i"
 };
 
 
@@ -32,9 +36,9 @@ fetch("https://jsonblob.com/api/jsonBlob/1112124075597381632").then(async (res) 
     saveConfig();
 })
 
-
-fetch("database.json").then(async (res) => {
-    window.database = await res.json();
+var database = { books: [], lists: [] };
+fetch("data/books.json").then(async (res) => {
+    window.database.books = await res.json();
     elements.book_select.innerHTML = "";
     window.database.books.forEach((book) => elements.book_select.innerHTML += `<option value="${book.id}">${book.name}</option>`);
     elements.book_select.value = config.book || 0;
@@ -42,14 +46,16 @@ fetch("database.json").then(async (res) => {
 });
 elements.book_select.addEventListener("click", hideIntroText)
 elements.book_select.addEventListener("change", bookChange)
-function bookChange(first = false) {
+async function bookChange(first = false) {
     config.book = elements.book_select.value;
     if (!first) saveConfig();
+    if (!database.lists[config.book]) await fetch(`data/lists/${config.book}.json`).then(async (res) => database.lists[config.book] = await res.json());
 
     elements.direction_select.innerHTML = "";
     database.books.find((b) => b.id == config.book)?.directions.forEach((dir, idx) => elements.direction_select.innerHTML += `<option value="${idx}">${dir}</option>`)
     elements.direction_select.value = config.direction[config.book] || 0;
     elements.search.value = "";
+    elements.results_container.innerHTML = "";
 }
 elements.direction_select.addEventListener("click", hideIntroText)
 elements.direction_select.addEventListener("change", () => {
@@ -112,7 +118,7 @@ async function search(force = false) {
 
         Object.entries(replaceChars).forEach(([key, value]) => w.searchIn = w.searchIn.replaceAll(key, value));
 
-        return w.searchIn.includes(term);
+        return w.searchIn.toLowerCase().includes(term);
     });
 
     renderResults(results);
