@@ -1,0 +1,206 @@
+/* FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+
+/* RESET */
+@import "reset.css";
+span.material-symbols-outlined {
+	font-size: inherit;
+}
+
+/* VARIABLES */
+:root {
+	--clr-bg-900: #1a1a1a;
+	--clr-white: #ffffff;
+	--clr-white-300: #d1d1d1;
+	--clr-white-500: #aaaaaa;
+	--clr-white-700: #6d6d6d;
+	--clr-black: #000000;
+	--clr-primary-100: #8300cf;
+	--clr-primary-800: #44006e;
+	--clr-primary-900: #30004d;
+
+	--gradient-primary-background: linear-gradient(to right bottom, #2c004418, #41006949, #2f004d23);
+	--gradient-secondary-background: linear-gradient(to right bottom, #2c004400, #41006925, #2f004d0e);
+
+	--border-radius: 0.8rem;
+	--padding: 1rem;
+	--margin: 1rem;
+}
+
+/* Styles */
+html,
+body,
+.block-grid {
+	height: 100%;
+}
+body {
+	padding: var(--padding);
+
+	background-color: var(--clr-bg-900);
+	font-family: "Roboto", sans-serif;
+	color: var(--clr-white);
+}
+
+.block-grid {
+	display: grid;
+	grid-template-rows: min-content 1fr min-content;
+	gap: var(--padding);
+}
+
+.block {
+	position: relative;
+	padding: var(--padding);
+
+	background: var(--gradient-primary-background);
+	border: 1px solid var(--clr-primary-100);
+	border-radius: var(--border-radius);
+}
+
+/* Block - Intro */
+.block.block-intro p {
+	margin-top: var(--margin);
+}
+.block.block-intro .hide-btn {
+	position: absolute;
+	top: var(--padding);
+	right: var(--padding);
+
+	font-size: 2rem;
+	color: var(--clr-white-700);
+
+	user-select: none;
+	cursor: pointer;
+}
+
+.block.block-intro .select-group {
+	display: flex;
+	gap: var(--padding);
+}
+.block.block-intro select,
+.block.block-intro input {
+	margin-top: var(--margin);
+	width: 100%;
+	padding: calc(var(--padding) / 2);
+
+	color: var(--clr-white);
+	background: var(--gradient-primary-background);
+	border: 1px solid var(--clr-primary-100);
+	border-radius: var(--border-radius);
+}
+.block.block-intro select option {
+	color: var(--clr-black);
+}
+.block.block-intro select:focus,
+.block.block-intro input:focus {
+	outline: none;
+}
+.hide-on-mobile {
+	display: none;
+}
+
+/* Block - Results */
+.block-results-container {
+	overflow: hidden;
+}
+.block.block-results {
+	height: 100%;
+	overflow: auto;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-rows: min-content;
+	gap: calc(var(--padding) / 2);
+}
+
+.word-box {
+	padding: calc(var(--padding) / 2);
+
+	background: var(--gradient-secondary-background);
+	border: 1px solid var(--clr-primary-800);
+	border-radius: var(--border-radius);
+}
+.word-box .note {
+	margin-left: 5px;
+	font-style: italic;
+}
+.word-box .translation {
+	color: var(--clr-white-500);
+}
+.word-box .word {
+	font-weight: 500;
+}
+
+/* Block - Footer */
+.block.block-footer p.author {
+	margin-top: var(--margin);
+	font-size: 1.2rem;
+}
+.contact-links {
+	display: flex;
+	gap: calc(var(--padding) * 2);
+}
+.contact-links a {
+	display: flex;
+	align-items: center;
+	margin-top: calc(var(--padding) / 2);
+
+	color: var(--clr-white);
+	text-decoration: none;
+
+	font-size: 1rem;
+}
+.contact-links a span {
+	margin-right: calc(var(--padding) / 2);
+
+	font-size: 1.5rem;
+	color: var(--clr-primary-100);
+}
+
+/* ANIMATIONS */
+a {
+	position: relative;
+}
+a:after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	bottom: -1px;
+	left: 0;
+	background: var(--clr-primary-100);
+}
+@media (min-width: 1000px) {
+	a:after {
+		transform: scaleX(0);
+		opacity: 0;
+
+		transform-origin: center left;
+		transition: all 250ms ease-out;
+	}
+	a:hover:after {
+		transform: scaleX(1);
+		opacity: 1;
+	}
+
+	.block-grid {
+		grid-template-columns: 400px 1fr;
+		grid-template-rows: 1fr min-content;
+	}
+
+	.block-results-container {
+		grid-column: 2 / 3;
+		grid-row: 1 / 3;
+
+		overflow-y: auto;
+	}
+	.block.block-results {
+		height: auto;
+		min-height: 100%;
+
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	.hide-on-mobile {
+		display: block;
+	}
+}

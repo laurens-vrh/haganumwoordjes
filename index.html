@@ -1,59 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Haganum Woordjes</title>
-		<script src="script.js" defer></script>
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8662793398579306"
-     crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="style.css" />
 
-		<link id="favicon"
-			rel="icon" 
-			type="image/png" 
-			href="favicon.png"
-		/>
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://haganumwoordjes.ga/"/>
-		<meta property="og:title" content="Haganum Woordjes"/>
-		<meta property="og:description" content="Alle woordjes die je moet leren, op één plek."/>
-		<meta name="theme-color" content="#46d0e6"> 
-		<meta property="og:image" content="https://haganumwoordjes.ga/logo_icon_dinges.png" />
-		<meta name="description" content="Alle woordjes die je moet leren, op één plek.">
-	</head>	 
-	<body>
-		<div class="welcome">
-			<h1>Haganum Woordjes</h1>
-			<a href="#" class="hide-show" id="hide-show">Hide</a>
-			<p>
-				Selecteer een boek, en typ een woordje!<br />
-				Als er fouten of dubbele woorden zijn, mail me dan even!!<br /><br />
-				Gemaakt door Stormweb.<br />
-				<a href="mailto:6081@leerling.haganum.nl">Mail</a> •
-				<a href="http://doehetgewoon.github.io">Website</a> • 
-				<a href="https://github.com/stormweb-dev">GitHub</a>
-			</p>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Woordjes | haganum.net</title>
+
+	<script src="js/script.js" defer></script>
+	<link rel="stylesheet" href="css/style.css" />
+
+
+	<link rel="icon" type="image/png" href="img/favicon.png" data-ref="favicon" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://haganum.net/woordjes.htm" />
+	<meta property="og:title" content="Woordjes | haganum.net" />
+	<meta property="og:description" content="Alle woordjes die je moet leren, op één plek." />
+	<meta name="theme-color" content="#46d0e6">
+	<meta property="og:image" content="https://haganumwoordjes.netlify.app/img/logo.png" />
+	<meta name="description" content="Alle woordjes die je moet leren, op één plek.">
+
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8662793398579306"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="block-grid">
+		<div class="block block-intro">
+			<h1>Haganumwoordjes</h1>
+			<btn class="hide-btn" data-ref="hide-btn"><span class="material-symbols-outlined">visibility_off</span>
+			</btn>
+			<p data-ref='intro-text'>Hier vind je de precieze vertaling van alle woordjes uit je leerboeken, en hoef je
+				niet te hannesen met
+				woordenlijsten of Google Translate.</p>
+			<p data-ref="news">...</p>
+
+			<div class="select-group">
+				<select class="book-select" data-ref="book-select">
+					<option value="">laden...</option>
+				</select>
+				<select class="direction-select" data-ref="direction-select">
+					<option value="">laden...</option>
+				</select>
+			</div>
+			<input placeholder="Zoeken..." autocomplete="off" data-ref="search" />
+		</div>
+
+		<div class="block-results-container">
+			<div class="block block-results" data-ref="results-container"></div>
+		</div>
+
+		<div class="block block-footer">
+			<p>Heb je vragen of suggesties? Neem contact met me op!</p>
+			<p class="author">Laurens Verhaar</p>
+			<ul class="contact-links">
+				<li><a href="mailto:6081@leerling.haganum.nl"><span class="material-symbols-outlined">
+							mail
+						</span>E-mail</a></li>
+				<li><a href="https://laurensverhaar.nl" target="_blank"><span class="material-symbols-outlined">
+							language
+						</span>Website</a></li>
+				<li><a href="https://github.com/laurens-vrh" target="_blank"><span
+							class="material-symbols-outlined">data_object</span>GitHub</a>
+				</li>
+			</ul>
 			<p id="updates"></p>
 		</div>
+	</div>
+</body>
 
-		<div class="book-select">
-			<label for="book-select" style="font-size: 1px;color: #00000000;position: absolute;">.</label>
-			<select id="book-select">
-				<option value="vivatroma">Vivat Roma</option>
-				<option value="libreservicejuniorvwo">Libre Service Junior VWO</option>
-				<option value="kosmos">Kosmos 1.A-12.D</option>
-				<option value="zugspitze">ZugSpitze VWO</option>
-			</select>
-		</div>
-
-		<div class="container">
-			<label for="search-box" style="font-size: 1px;color: #00000000;position: absolute;">.</label>
-			<input id="search-box" placeholder="Zoeken..." autocomplete="off" />
-			<div class="results-container" id="results-container"></div>
-		</div>
-
-		<label for="copy-hold" style="font-size: 1px;color: #00000000;position: absolute;">.</label>
-		<input id="copy-hold" style="opacity: 0;cursor: default;"></input>
-	</body>
 </html>
