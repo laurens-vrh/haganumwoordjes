@@ -36,31 +36,20 @@ fetch("https://jsonblob.com/api/jsonBlob/1112124075597381632").then(async (res) 
 fetch("database.json").then(async (res) => {
     window.database = await res.json();
     elements.book_select.innerHTML = "";
-    window.database.books.forEach((book) => {
-        const option = document.createElement("option");
-        option.setAttribute("value", book.id);
-        option.innerText = book.name;
-        elements.book_select.appendChild(option);
-    });
+    window.database.books.forEach((book) => elements.book_select.innerHTML += `<option value="${book.id}">${book.name}</option>`);
     elements.book_select.value = config.book || 0;
-    bookChange();
+    bookChange(true);
 });
 elements.book_select.addEventListener("click", hideIntroText)
 elements.book_select.addEventListener("change", bookChange)
-function bookChange() {
+function bookChange(first = false) {
     config.book = elements.book_select.value;
-    saveConfig();
+    if (!first) saveConfig();
 
     elements.direction_select.innerHTML = "";
-    database.books[config.book].directions.forEach((dir, idx) => {
-        const option = document.createElement("option");
-        option.setAttribute("value", idx);
-        option.innerText = dir;
-        elements.direction_select.appendChild(option);
-    })
+    database.books.find((b) => b.id == config.book)?.directions.forEach((dir, idx) => elements.direction_select.innerHTML += `<option value="${idx}">${dir}</option>`)
     elements.direction_select.value = config.direction[config.book] || 0;
-
-    search(true);
+    elements.search.value = "";
 }
 elements.direction_select.addEventListener("click", hideIntroText)
 elements.direction_select.addEventListener("change", () => {
@@ -118,7 +107,7 @@ async function search(force = false) {
     const list = database.lists[config.book]
 
     const results = term === '*' ? list : list.filter((w) => {
-        if (config.direction[config.book] === 0) w.searchIn = w.word;
+        if ((config.direction[config.book] || 0) === 0) w.searchIn = w.word;
         else if (config.direction[config.book] === 1) w.searchIn = w.translations.join("\n");
 
         Object.entries(replaceChars).forEach(([key, value]) => w.searchIn = w.searchIn.replaceAll(key, value));
