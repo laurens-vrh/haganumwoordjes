@@ -83,7 +83,10 @@ elements.hide_btn.addEventListener("click", (e) => {
 
 // CONFIG
 function saveConfig() { localStorage.setItem("config", JSON.stringify(config)) };
-function loadConfig() { return JSON.parse(localStorage.getItem("config")) };
+function loadConfig() {
+    const localConfig = localStorage.getItem("config")
+    return localConfig ? JSON.parse(localStorage.getItem("config")) : {}
+};
 
 function setHidden(hidden, load = false) {
     if (config.hidden === hidden && !load) return;
