@@ -55,12 +55,18 @@ async function bookChange(e, first = false) {
 	elements.search.value = "";
 	elements.results_container.innerHTML = "";
 }
-elements.direction_select.addEventListener("click", hideIntroText);
-elements.direction_select.addEventListener("change", () => {
-	config.direction[config.book] = parseInt(elements.direction_select.value);
+elements.direction_select.addEventListener("mousedown", (e) => {
+	e.preventDefault();
+	hideIntroText();
+
+	const newDirection = 1 - config.direction[config.book];
+	elements.direction_select.value = newDirection;
+	config.direction[config.book] = newDirection;
+
 	saveConfig();
 	search(true);
 });
+elements.direction_select.addEventListener("change", () => {});
 function hideIntroText() {
 	elements.intro_text.classList.add("hide-on-mobile");
 	elements.news.classList.add("hide-on-mobile");
