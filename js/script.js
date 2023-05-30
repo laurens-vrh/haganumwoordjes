@@ -19,6 +19,15 @@ const replaceChars = {
 	ï: "i"
 };
 
+// FIX ADSENSE
+const blockGrid = document.querySelector(".block-grid");
+blockGrid.style.height = "100%";
+const blockGridObserver = new MutationObserver((mutations, observer) => (blockGrid.style.height = "100%"));
+blockGridObserver.observe(blockGrid, {
+	attributes: true,
+	attributeFilter: ["style"]
+});
+
 // PAGE LOAD
 const config = loadConfig();
 config.direction ? {} : (config.direction = {});
