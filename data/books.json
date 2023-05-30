@@ -1,7 +1,7 @@
 [
 	{ "name": "Vivat Roma", "id": 0, "directions": ["Latijn -> Nederlands", "Nederlands -> Latijn"] },
 	{ "name": "Copia (t/m 50)", "id": 4, "directions": ["Latijn -> Nederlands", "Nederlands -> Latijn"] },
-	{ "name": "Duits Woordenlijst (t/m 600)", "id": 5, "directions": ["Nederlands -> Duits", "Duits -> Nederlands"] },
+	{ "name": "Duits Woordenlijst (t/m 600)", "id": 5, "directions": ["Duits -> Nederlands", "Nederlands -> Duits"] },
 	{ "name": "ZugSpitze", "id": 1, "directions": ["Duits -> Nederlands", "Nederlands -> Duits"] },
 	{ "name": "Libre Service Junior", "id": 2, "directions": ["Frans -> Nederlands", "Nederlands -> Frans"] },
 	{ "name": "Kosmos", "id": 3, "directions": ["Grieks -> Nederlands", "Nederlands -> Grieks"] }
