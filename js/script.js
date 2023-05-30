@@ -109,45 +109,15 @@ async function search(force = false) {
 	const results =
 		term === "*"
 			? list
-			: list
-					.map((w) => {
-						if ((config.direction[config.book] || 0) === 0) w.searchIn = w.word;
-						else if (config.direction[config.book] === 1) w.searchIn = w.translations.join("\n");
+			: list.filter((w) => {
+					if ((config.direction[config.book] || 0) === 0) w.searchIn = w.word;
+					else if (config.direction[config.book] === 1) w.searchIn = w.translations.join("\n");
 
-						Object.entries(replaceChars).forEach(([key, value]) => (w.searchIn = w.searchIn.replaceAll(key, value)));
-						// return w.searchIn.toLowerCase().includes(term);
-						w.cost = computeLevenshteinRelevance(term, w.searchIn);
-						console.log(w.searchIn, w.cost);
-						return w;
-					})
-					// .filter((w) => w.cost)
-					.sort((a, b) => b.cost - a.cost);
-	console.log(results);
+					Object.entries(replaceChars).forEach(([key, value]) => (w.searchIn = w.searchIn.replaceAll(key, value)));
+
+					return w.searchIn.toLowerCase().includes(term);
+			  });
 	renderResults(results);
-}
-
-function computeLevenshteinRelevance(term, word) {
-	var d = new Array(term.length);
-	for (let i = 0; i < d.length; i++) {
-		d[i] = new Array(word.length);
-	}
-	for (let i = 0; i < term.length; i++) {
-		d[i][0] = i;
-	}
-	for (let j = 0; j < word.length; j++) {
-		d[0][j] = j;
-	}
-
-	var cost;
-	for (let i = 1; i < term.length; i++) {
-		for (let j = 1; j < word.length; j++) {
-			if (term[i] === word[j]) cost = 0;
-			else cost = 1;
-			d[i][j] = Math.min((d[i - 1][j] + 1) * 2, (d[i][j - 1] + 1) * 0, d[i - 1][j - 1] + cost);
-		}
-	}
-
-	return d[term.length - 1][word.length - 1];
 }
 
 function renderResults(results) {
