@@ -59,7 +59,7 @@ elements.direction_select.addEventListener("mousedown", (e) => {
 	e.preventDefault();
 	hideIntroText();
 
-	const newDirection = 1 - config.direction[config.book];
+	const newDirection = 1 - (config.direction[config.book] || 0);
 	elements.direction_select.value = newDirection;
 	config.direction[config.book] = newDirection;
 
