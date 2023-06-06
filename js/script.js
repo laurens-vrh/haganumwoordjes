@@ -35,10 +35,10 @@ saveConfig();
 setHidden(config.hidden || false, true);
 
 // news
-elements.news.innerText = config.news || "...";
+elements.news.innerHTML = config.news || "...";
 fetch("https://jsonblob.com/api/jsonBlob/1112124075597381632").then(async (res) => {
 	json = await res.json();
-	elements.news.innerText = json.news;
+	elements.news.innerHTML = json.news;
 	config.news = json.news;
 	saveConfig();
 });
@@ -102,7 +102,7 @@ function setHidden(hidden, load = false) {
 
 	document.title = hidden ? "Gymnasium Haganum - Agenda" : "Woordjes | haganum.net";
 	elements.favicon.href = hidden ? `https://calendar.google.com/googlecalendar/images/favicons_2020q4/calendar_${new Date().getDate()}.ico` : "img/favicon.png";
-	elements.hide_btn.children[0].innerText = hidden ? "visibility" : "visibility_off";
+	elements.hide_btn.children[0].src = hidden ? "img/icon-visibility.svg" : "img/icon-visibility_off.svg";
 	if (load) return;
 	config.hidden = hidden;
 	saveConfig();

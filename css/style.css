@@ -1,12 +1,8 @@
 /* FONTS */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 /* RESET */
 @import "reset.css";
-span.material-symbols-outlined {
-	font-size: inherit;
-}
 
 /* VARIABLES */
 :root {
@@ -66,10 +62,9 @@ body {
 	top: var(--padding);
 	right: var(--padding);
 
-	font-size: 2rem;
+	width: 2rem;
 	color: var(--clr-white-700);
 
-	user-select: none;
 	cursor: pointer;
 }
 
@@ -144,6 +139,9 @@ body {
 	font-size: 1.2rem;
 }
 
+.block.block-footer img {
+	width: 1rem;
+}
 .block.block-footer p {
 	margin-top: var(--margin);
 	color: var(--clr-white-300);
@@ -163,11 +161,10 @@ body {
 	font-weight: bold;
 	color: var(--clr-white);
 }
-.block.block-footer .contact-links a span {
+.block.block-footer .contact-links a img {
 	margin-right: calc(var(--padding) / 2);
 
-	font-size: 1.5rem;
-	color: var(--clr-primary-100);
+	width: 1.5rem;
 }
 
 /* ANIMATIONS */
